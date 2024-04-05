@@ -4,6 +4,7 @@
  */
 package Upotech;
 
+import Ordenador.IOrdenador;
 import Ordenador.Strategy;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -126,9 +127,13 @@ class Pantalla {
         Iterator it = c.mostrarStock();
         Strategy o;
         System.out.println("**********************\nSTOCK DE ORDENADORES");
-        while (it.hasNext()) {
+        /*while (it.hasNext()) {
             o = (Strategy) it.next();
             System.out.println(o);
+        }*/
+        while (it.hasNext()) {
+            IOrdenador or = (IOrdenador) it.next();
+            System.out.println(or);
         }
         System.out.println("**********************");
     }
