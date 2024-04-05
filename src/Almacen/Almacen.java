@@ -9,7 +9,9 @@ import Factory.PerifericosCable;
 import Factory.PerifericosFactory;
 import Factory.PerifericosInalambricos;
 import Factory.Raton;
+import Ordenador.IOrdenador;
 import Ordenador.Ordenador;
+import Ordenador.OrdenadorImpl;
 import Ordenador.OrdenadorReserva;
 import Ordenador.OrdenadorVenta;
 import Ordenador.Strategy;
@@ -21,9 +23,10 @@ import java.util.List;
  *
  * @author jairo
  */
-public class Almacen implements iAlmacen{
+public class Almacen implements iAlmacen {
 
     private List<Strategy> stock;
+    private List<IOrdenador> ordenadorRepository;
     private static Almacen instance;
     private PerifericosFactory factoryCable = new PerifericosCable();
     private PerifericosFactory factoryInalambrico = new PerifericosInalambricos();
@@ -38,6 +41,7 @@ public class Almacen implements iAlmacen{
         stock.add(o);
         stock.add(o2);
         stock.add(o3);
+        this.populateRepository();
     }
     //Metodo para patron simpleton
     public static Almacen getInstance() {
@@ -132,6 +136,16 @@ public class Almacen implements iAlmacen{
         //Si se realizo el pedido con exito, se añade a la lista de encargos
        
         return precio;
+    }
+    
+    private void populateRepository() {
+        this.ordenadorRepository = new ArrayList<IOrdenador>();
+        OrdenadorImpl o1 = new OrdenadorImpl("HP", 5, 2000);
+        OrdenadorImpl o2 = new OrdenadorImpl("Dell", 3, 1000);
+        OrdenadorImpl o3 = new OrdenadorImpl("Apple", 4, 5000);
+        ordenadorRepository.add(o2);
+        ordenadorRepository.add(o1);
+        ordenadorRepository.add(o3);
     }
     
 }
